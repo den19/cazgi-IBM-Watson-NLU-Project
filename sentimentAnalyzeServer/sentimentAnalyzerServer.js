@@ -30,6 +30,18 @@ app.get("/",(req,res)=>{
   });
 
 app.get("/url/emotion", (req,res) => {
+    
+    const analyzeParams = {
+    'html': req,
+    };
+
+    naturalLanguageUnderstanding.analyze(analyzeParams)
+        .then(analysisResults => {
+            console.log(JSON.stringify(analysisResults, null, 2));
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
 
     return res.send({"happy":"90","sad":"10"});
 });
